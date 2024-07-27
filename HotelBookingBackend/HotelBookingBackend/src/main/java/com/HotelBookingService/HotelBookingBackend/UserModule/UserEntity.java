@@ -1,6 +1,7 @@
 package com.HotelBookingService.HotelBookingBackend.UserModule;
 
 import com.HotelBookingService.HotelBookingBackend.BookingModule.BookingEntity;
+import com.HotelBookingService.HotelBookingBackend.FeedbackModule.FeedbackEntity;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -23,13 +24,32 @@ public class UserEntity {
     @OneToMany(mappedBy = "user")
     private List<BookingEntity> bookings;
 
-    public long getuserId() {
+    public List<FeedbackEntity> getFeedbackEntities() {
+        return feedbackEntities;
+    }
+
+    public void setFeedbackEntities(List<FeedbackEntity> feedbackEntities) {
+        this.feedbackEntities = feedbackEntities;
+    }
+
+    public long getUserId() {
         return userId;
     }
 
-    public void setuserId(long userid) {
-        userId = userid;
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
+
+    @OneToMany(mappedBy = "user")
+    private List<FeedbackEntity> feedbackEntities;
+
+//    public long getuserId() {
+//        return userId;
+//    }
+//
+//    public void setuserId(long userid) {
+//        userId = userid;
+//    }
 
     public String getUsername() {
         return username;

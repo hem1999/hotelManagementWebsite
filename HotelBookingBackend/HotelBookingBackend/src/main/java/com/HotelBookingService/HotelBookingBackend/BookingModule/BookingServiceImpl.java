@@ -42,7 +42,6 @@ public class BookingServiceImpl implements BookingServices{
             bookingEntity1.setRooms(bookingEntity.getRooms());
             bookingEntity1.setEndDate(bookingEntity.getEndDate());
             bookingEntity1.setStartDate(bookingEntity.getStartDate());
-            bookingEntity1.setUser(bookingEntity.getUser());
             this.bookingRepository.save(bookingEntity1);
             return true;
         }

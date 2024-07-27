@@ -11,10 +11,11 @@ public class FeedbackEntity {
     @GeneratedValue
     private FeedbackId feedbackId;
 
-    @ManyToOne(mappedBy = "userId")
+    @ManyToOne
+    @JoinColumn(name="userId")
     private UserEntity user;
 
-    @ManyToOne
-    @JoinColumn(name = "roomId")
-    private RoomEntity room;
+//    @ManyToOne
+//    @JoinColumn(name = "roomId")
+//    private RoomEntity room;
 }

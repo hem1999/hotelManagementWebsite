@@ -1,6 +1,5 @@
 package com.HotelBookingService.HotelBookingBackend.RoomsModule;
 
-import com.HotelBookingService.HotelBookingBackend.BookingModule.BookingEntity;
 import com.HotelBookingService.HotelBookingBackend.FeedbackModule.FeedbackEntity;
 import jakarta.persistence.*;
 
@@ -16,24 +15,12 @@ public class RoomEntity {
     private String roomType;
     private int roomCapacity;
     private String roomDescription;
-    @ManyToOne
-    @JoinColumn(name = "bookingId")
-    private BookingEntity booking;
+//    @ManyToOne
+//    @JoinColumn(name = "bookingId")
+//    private BookingEntity booking;
 
     @OneToMany
     private List<FeedbackEntity> feedbacks;
-
-    public BookingEntity getBookingEntity() {
-        return booking;
-    }
-
-    public BookingEntity getBooking() {
-        return booking;
-    }
-
-    public void setBooking(BookingEntity booking) {
-        this.booking = booking;
-    }
 
     public List<FeedbackEntity> getFeedbacks() {
         return feedbacks;
@@ -43,9 +30,7 @@ public class RoomEntity {
         this.feedbacks = feedbacks;
     }
 
-    public void setBookingEntity(BookingEntity bookingEntity) {
-        this.booking = bookingEntity;
-    }
+
 
 
 

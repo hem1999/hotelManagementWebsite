@@ -15,9 +15,9 @@ public class BookingEntity {
     @Column()
     private Long bookingId;
 
-    @ManyToOne
-    @JoinColumn(name = "userId")
-    public UserEntity user;
+//    @ManyToOne
+//    @JoinColumn(name = "userId")
+//    public UserEntity user;
 
     @OneToMany(mappedBy = "booking")
     public List<RoomEntity> rooms;
@@ -33,13 +33,6 @@ public class BookingEntity {
         this.bookingId = bookingId;
     }
 
-    public UserEntity getUser() {
-        return user;
-    }
-
-    public void setUser(UserEntity user) {
-        this.user = user;
-    }
 
     public List<RoomEntity> getRooms() {
         return rooms;

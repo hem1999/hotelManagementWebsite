@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserServices {
 
     @Override
     public boolean updateUser(UserEntity userEntity) {
-            Optional<UserEntity> oldUserEntity = this.userRepository.findById(userEntity.getuserId());
+            Optional<UserEntity> oldUserEntity = this.userRepository.findById(userEntity.getUserId());
             if(oldUserEntity.isPresent()){
                 UserEntity user = oldUserEntity.get();
                 user.setPassword(userEntity.getPassword());

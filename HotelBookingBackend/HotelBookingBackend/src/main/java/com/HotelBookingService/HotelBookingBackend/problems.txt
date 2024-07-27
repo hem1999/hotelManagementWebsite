@@ -1,0 +1,2 @@
+1. bookings in the user are going in the infinite loop!
+https://dev.to/jhonifaber/hibernate-onetoone-onetomany-manytoone-and-manytomany-8ba
