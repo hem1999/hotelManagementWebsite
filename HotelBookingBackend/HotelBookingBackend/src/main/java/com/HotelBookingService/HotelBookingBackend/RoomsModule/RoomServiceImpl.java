@@ -1,5 +1,6 @@
 package com.HotelBookingService.HotelBookingBackend.RoomsModule;
 
+import com.HotelBookingService.HotelBookingBackend.FeedbackModule.FeedbackEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -60,5 +61,14 @@ public class RoomServiceImpl implements RoomServices{
     @Override
     public Optional<RoomEntity> GetRoomById(Long roomId) {
         return roomRepository.findById(roomId);
+    }
+
+    @Override
+    public List<FeedbackEntity> feedbacksByRoomId(Long roomId) {
+        Optional<RoomEntity> r = roomRepository.findById(roomId);
+        if(r.isPresent()) {
+            return r.get().getFeedbacks();
+        }
+        return List.of();
     }
 }

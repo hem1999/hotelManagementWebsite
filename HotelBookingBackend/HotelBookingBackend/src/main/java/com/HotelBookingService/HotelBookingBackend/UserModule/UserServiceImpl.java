@@ -1,6 +1,7 @@
 package com.HotelBookingService.HotelBookingBackend.UserModule;
 
 import com.HotelBookingService.HotelBookingBackend.BookingModule.BookingEntity;
+import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,19 +17,18 @@ public class UserServiceImpl implements UserServices {
 
     @Override
     public UserEntity findUserByEmail(String email) {
-        try{
-            UserEntity user = this.userRepository.findBy()
-        }
+        return this.userRepository.findByEmail(email).orElse(null);
     }
 
     @Override
     public UserEntity findUserByUsername(String username) {
-        return null;
+        return this.userRepository.findByUsername(username).orElse(null);
     }
 
     @Override
-    public UserEntity findUserById(int id) {
-        return null;
+    public UserEntity findUserById(Long id) {
+        Optional<UserEntity> user = this.userRepository.findById(id);
+        return user.orElse(null);
     }
 
     @Override
@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserServices {
 
     @Override
     public boolean updateUser(UserEntity userEntity) {
-            Optional<UserEntity> oldUserEntity = this.userRepository.findById(userEntity.getUserid());
+            Optional<UserEntity> oldUserEntity = this.userRepository.findById(userEntity.getuserId());
             if(oldUserEntity.isPresent()){
                 UserEntity user = oldUserEntity.get();
                 user.setPassword(userEntity.getPassword());
@@ -60,27 +60,18 @@ public class UserServiceImpl implements UserServices {
     }
 
     @Override
-    public boolean deleteUser(UserEntity userEntity) {
-
-        try{
-            this.userRepository.delete(userEntity);
+    public boolean deleteUser(Long userId) {
+        Optional<UserEntity> user = this.userRepository.findById(userId);
+        if(user.isPresent()){
+            this.userRepository.delete(user.get());
             return true;
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-            return false;
         }
+        return false;
     }
 
     @Override
     public List<BookingEntity> getBookings(Long userId) {
-        try{
-            UserEntity user = this.userRepository.findById(userId).get();
-            return user.getBookings();
-
-        }
-        catch (Exception e){
-            System.out.println(e.getMessage());
-            return null;
-        }
+        Optional<UserEntity> ue  = this.userRepository.findById(userId);
+        return ue.map(UserEntity::getBookings).orElse(null);
     }
 }

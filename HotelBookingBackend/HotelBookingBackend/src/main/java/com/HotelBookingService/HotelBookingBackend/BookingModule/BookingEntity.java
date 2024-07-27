@@ -5,23 +5,25 @@ import com.HotelBookingService.HotelBookingBackend.UserModule.UserEntity;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
 public class BookingEntity {
     @Id
     @GeneratedValue
+    @Column()
     private Long bookingId;
 
     @ManyToOne
-    @JoinColumn()
+    @JoinColumn(name = "userId")
     public UserEntity user;
 
     @OneToMany(mappedBy = "booking")
     public List<RoomEntity> rooms;
 
-    private Timestamp startDate;
-    private Timestamp endDate;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
 
     public Long getBookingId() {
         return bookingId;
@@ -47,19 +49,19 @@ public class BookingEntity {
         this.rooms = rooms;
     }
 
-    public Timestamp getStartDate() {
+    public LocalDateTime getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Timestamp startDate) {
+    public void setStartDate(LocalDateTime startDate) {
         this.startDate = startDate;
     }
 
-    public Timestamp getEndDate() {
+    public LocalDateTime getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Timestamp endDate) {
+    public void setEndDate(LocalDateTime endDate) {
         this.endDate = endDate;
     }
 

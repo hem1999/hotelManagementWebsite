@@ -1,23 +1,46 @@
 package com.HotelBookingService.HotelBookingBackend.RoomsModule;
 
 import com.HotelBookingService.HotelBookingBackend.BookingModule.BookingEntity;
+import com.HotelBookingService.HotelBookingBackend.FeedbackModule.FeedbackEntity;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class RoomEntity {
     @Id
     @GeneratedValue
+    @Column()
     private Long roomId;
     private String roomName;
     private String roomType;
     private int roomCapacity;
     private String roomDescription;
     @ManyToOne
-    @JoinColumn()
+    @JoinColumn(name = "bookingId")
     private BookingEntity booking;
+
+    @OneToMany
+    private List<FeedbackEntity> feedbacks;
 
     public BookingEntity getBookingEntity() {
         return booking;
+    }
+
+    public BookingEntity getBooking() {
+        return booking;
+    }
+
+    public void setBooking(BookingEntity booking) {
+        this.booking = booking;
+    }
+
+    public List<FeedbackEntity> getFeedbacks() {
+        return feedbacks;
+    }
+
+    public void setFeedbacks(List<FeedbackEntity> feedbacks) {
+        this.feedbacks = feedbacks;
     }
 
     public void setBookingEntity(BookingEntity bookingEntity) {

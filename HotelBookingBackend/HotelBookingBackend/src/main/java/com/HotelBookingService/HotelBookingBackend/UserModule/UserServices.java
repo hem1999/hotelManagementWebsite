@@ -10,9 +10,9 @@ public interface UserServices {
 
     public UserEntity findUserByEmail(String email);
     public UserEntity findUserByUsername(String username);
-    public UserEntity findUserById(int id);
+    public UserEntity findUserById(Long id);
     public boolean addUser(UserEntity userEntity);
     public boolean updateUser(UserEntity userEntity);
-    public boolean deleteUser(UserEntity userEntity);
+    public boolean deleteUser(Long userId);
     public List<BookingEntity> getBookings(Long userId);
 }

@@ -1,10 +1,7 @@
 package com.HotelBookingService.HotelBookingBackend.UserModule;
 
 import com.HotelBookingService.HotelBookingBackend.BookingModule.BookingEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 import java.util.List;
 
@@ -12,9 +9,10 @@ import java.util.List;
 @Entity
 public class UserEntity {
 
+    @Column()
     @Id
     @GeneratedValue
-    private long Userid;
+    private long userId;
     private String username;
     private String password;
     private String firstName;
@@ -25,12 +23,12 @@ public class UserEntity {
     @OneToMany(mappedBy = "user")
     private List<BookingEntity> bookings;
 
-    public long getUserid() {
-        return Userid;
+    public long getuserId() {
+        return userId;
     }
 
-    public void setUserid(long userid) {
-        Userid = userid;
+    public void setuserId(long userid) {
+        userId = userid;
     }
 
     public String getUsername() {
