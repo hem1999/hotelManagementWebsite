@@ -1,18 +1,27 @@
 package com.HotelBookingService.HotelBookingBackend.UserModule;
 
 import com.HotelBookingService.HotelBookingBackend.BookingModule.BookingEntity;
+import com.HotelBookingService.HotelBookingBackend.BookingModule.BookingRepository;
+import com.HotelBookingService.HotelBookingBackend.RoomsModule.RoomEntity;
+import com.HotelBookingService.HotelBookingBackend.RoomsModule.RoomRepository;
+import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
 import org.apache.catalina.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserServices {
 
-    private UserRepository userRepository;
+
+    private final UserRepository userRepository;
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
+
     }
 
     @Override
@@ -32,9 +41,17 @@ public class UserServiceImpl implements UserServices {
     }
 
     @Override
-    public boolean addUser(UserEntity userEntity) {
+    public boolean addUser(AddUserDTO addUserDTO) {
         try {
-            this.userRepository.save(userEntity);
+            UserEntity user = new UserEntity();
+            user.setEmail(addUserDTO.getEmail());
+            user.setPassword(addUserDTO.getPassword());
+            user.setFirstName(addUserDTO.getFirstName());
+            user.setLastName(addUserDTO.getLastName());
+            user.setPhone(addUserDTO.getPhone());
+            user.setUserType(addUserDTO.getUserType());
+            user.setUsername(addUserDTO.getUsername());
+            this.userRepository.save(user);
             return true;
         }
         catch (Exception e){
@@ -44,18 +61,19 @@ public class UserServiceImpl implements UserServices {
     }
 
     @Override
-    public boolean updateUser(UserEntity userEntity) {
-            Optional<UserEntity> oldUserEntity = this.userRepository.findById(userEntity.getUserId());
+    public boolean updateUser(updateUserDTO userDTO) {
+            Optional<UserEntity> oldUserEntity = this.userRepository.findById(userDTO.getUserId());
             if(oldUserEntity.isPresent()){
                 UserEntity user = oldUserEntity.get();
-                user.setPassword(userEntity.getPassword());
-                user.setFirstName(userEntity.getFirstName());
-                user.setLastName(userEntity.getLastName());
-                user.setPhone(userEntity.getPhone());
+                user.setFirstName(userDTO.getFirstName());
+                user.setLastName(userDTO.getLastName());
+                user.setPhone(userDTO.getPhone());
+                user.setUserType(userDTO.getUserType());
                 this.userRepository.save(user);
                 return true;
+            }else{
+                throw new EntityNotFoundException("User not found");
             }
-            return false;
 
     }
 

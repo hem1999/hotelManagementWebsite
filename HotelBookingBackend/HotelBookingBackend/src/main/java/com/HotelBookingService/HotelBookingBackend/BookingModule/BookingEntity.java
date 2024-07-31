@@ -4,7 +4,6 @@ import com.HotelBookingService.HotelBookingBackend.RoomsModule.RoomEntity;
 import com.HotelBookingService.HotelBookingBackend.UserModule.UserEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -31,5 +30,6 @@ public class BookingEntity {
 
     private LocalDateTime startDate;
     private LocalDateTime endDate;
+    private LocalDateTime bookingDate;
 
 }

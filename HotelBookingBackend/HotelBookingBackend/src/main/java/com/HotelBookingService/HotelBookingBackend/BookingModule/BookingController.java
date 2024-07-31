@@ -1,24 +1,25 @@
 package com.HotelBookingService.HotelBookingBackend.BookingModule;
 
+
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/bookings")
 public class BookingController {
-    private BookingServiceImpl bookingService;
+    private final BookingServiceImpl bookingService;
 
     public BookingController(BookingServiceImpl bookingService) {
         this.bookingService = bookingService;
     }
 
     @GetMapping
-    public ResponseEntity<List<BookingEntity>> getBookings() {
+    public ResponseEntity<List<GetBookingDTO>> getBookings() {
         try {
-            List<BookingEntity> b = this.bookingService.getAllBookings();
+            List<GetBookingDTO> b = this.bookingService.getAllBookings();
             return ResponseEntity.ok(b);
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
@@ -26,8 +27,8 @@ public class BookingController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<BookingEntity> getBookingById(@PathVariable Long id) {
-        BookingEntity b = this.bookingService.getBookingById(id);
+    public ResponseEntity<GetBookingDTO> getBookingById(@PathVariable Long id) {
+        GetBookingDTO b = this.bookingService.getBookingById(id);
         if (b != null) {
             return ResponseEntity.ok(b);
         } else {
@@ -36,28 +37,27 @@ public class BookingController {
     }
 
     @PostMapping("/addBooking")
-    public ResponseEntity<BookingEntity> addBooking(@RequestBody BookingEntity booking) {
-        boolean isValid = this.bookingService.addBooking(booking);
-        if (isValid) {
-            return ResponseEntity.ok(booking);
+    public ResponseEntity<AddBookingDTO> addBooking(@RequestBody AddBookingDTO addBookingDTO) {
+        if (this.bookingService.addBooking(addBookingDTO)) {
+            return new ResponseEntity<>(addBookingDTO, HttpStatus.OK);
         }
-        return ResponseEntity.badRequest().build();
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @PutMapping("/updateBooking")
-    public ResponseEntity<BookingEntity> updateBooking(@RequestBody BookingEntity booking) {
+    public ResponseEntity<UpdateBookingDTO> updateBooking(@RequestBody UpdateBookingDTO booking) {
         boolean isValid = this.bookingService.updateBooking(booking);
         if (isValid) {
-            return ResponseEntity.ok(booking);
+            return new ResponseEntity<>(booking, HttpStatus.OK);
         }
         return ResponseEntity.badRequest().build();
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<BookingEntity> deleteBooking(@PathVariable Long id) {
+    public ResponseEntity<String> deleteBooking(@PathVariable Long id) {
         boolean isValid = this.bookingService.deleteBooking(id);
         if (isValid) {
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok("Deleted!");
         }
         return ResponseEntity.notFound().build();
     }

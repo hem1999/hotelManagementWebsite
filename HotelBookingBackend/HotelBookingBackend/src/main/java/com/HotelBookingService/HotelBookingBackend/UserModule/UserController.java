@@ -1,7 +1,7 @@
 package com.HotelBookingService.HotelBookingBackend.UserModule;
 
 import com.HotelBookingService.HotelBookingBackend.BookingModule.BookingEntity;
-import org.apache.catalina.User;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,19 +32,19 @@ public class UserController {
 //    }
 
     @PostMapping(path = "/addUser")
-    public ResponseEntity<UserEntity> addUser(@RequestBody UserEntity user) {
+    public ResponseEntity<AddUserDTO> addUser(@RequestBody AddUserDTO user) {
         if(this.userServiceImpl.addUser(user)){
-            return ResponseEntity.ok(user);
+            return new ResponseEntity<>(user, HttpStatus.OK);
         }
         return ResponseEntity.badRequest().build();
     }
 
     @PutMapping(path="/updateUser")
-    public ResponseEntity<UserEntity> updateUser(@RequestBody UserEntity user) {
+    public ResponseEntity<updateUserDTO> updateUser(@RequestBody updateUserDTO user) {
         if(this.userServiceImpl.updateUser(user)){
-            return ResponseEntity.ok(user);
+            return new ResponseEntity<>(user, HttpStatus.ACCEPTED);
         }
-        return ResponseEntity.badRequest().build();
+        return new ResponseEntity<>(user, HttpStatus.BAD_REQUEST);
     }
 
     @DeleteMapping(path="/deleteUser/{id}")
