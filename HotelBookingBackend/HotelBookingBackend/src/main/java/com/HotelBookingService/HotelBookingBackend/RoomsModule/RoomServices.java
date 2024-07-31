@@ -1,6 +1,8 @@
 package com.HotelBookingService.HotelBookingBackend.RoomsModule;
 
-import com.HotelBookingService.HotelBookingBackend.BookingModule.UpdateBookingDTO;
+import com.HotelBookingService.HotelBookingBackend.RoomsModule.DTOs.AddRoomDTO;
+import com.HotelBookingService.HotelBookingBackend.RoomsModule.DTOs.GetRoomDTO;
+import com.HotelBookingService.HotelBookingBackend.RoomsModule.DTOs.UpdateRoomDTO;
 
 import java.util.List;
 import java.util.Optional;

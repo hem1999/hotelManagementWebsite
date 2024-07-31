@@ -1,6 +1,8 @@
 package com.HotelBookingService.HotelBookingBackend.RoomsModule;
 
-import org.hibernate.sql.Update;
+import com.HotelBookingService.HotelBookingBackend.RoomsModule.DTOs.AddRoomDTO;
+import com.HotelBookingService.HotelBookingBackend.RoomsModule.DTOs.GetRoomDTO;
+import com.HotelBookingService.HotelBookingBackend.RoomsModule.DTOs.UpdateRoomDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

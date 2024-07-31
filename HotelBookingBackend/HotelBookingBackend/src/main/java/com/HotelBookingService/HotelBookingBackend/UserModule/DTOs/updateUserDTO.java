@@ -1,4 +1,4 @@
-package com.HotelBookingService.HotelBookingBackend.UserModule;
+package com.HotelBookingService.HotelBookingBackend.UserModule.DTOs;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -13,5 +13,5 @@ public class updateUserDTO {
     private String lastName;
     private String phone;
     private String userType;
-    // to change the password, email you should have more secure way!
+    // TODO:  to change the password, email you should have more secure way!
 }

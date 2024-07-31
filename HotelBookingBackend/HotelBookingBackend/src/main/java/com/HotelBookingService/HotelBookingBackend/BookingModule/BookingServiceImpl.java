@@ -1,5 +1,8 @@
 package com.HotelBookingService.HotelBookingBackend.BookingModule;
 
+import com.HotelBookingService.HotelBookingBackend.BookingModule.DTOs.AddBookingDTO;
+import com.HotelBookingService.HotelBookingBackend.BookingModule.DTOs.GetBookingDTO;
+import com.HotelBookingService.HotelBookingBackend.BookingModule.DTOs.UpdateBookingDTO;
 import com.HotelBookingService.HotelBookingBackend.RoomsModule.RoomEntity;
 import com.HotelBookingService.HotelBookingBackend.RoomsModule.RoomRepository;
 import com.HotelBookingService.HotelBookingBackend.UserModule.UserEntity;
@@ -81,7 +84,9 @@ public class BookingServiceImpl implements BookingServices{
             // TODO: First check for availabilities!
             if(updateBookingDTO.getStartDate() != null) {
                 b.setStartDate(updateBookingDTO.getStartDate());
-            }
+            }// TIP: Since you are sending UpdateBookingDTO as return value in response,
+            // If any attribute is null, it will show as null in response,
+            // So trust the updates with another GET request, not this
             if(updateBookingDTO.getEndDate() != null) {
                 b.setEndDate(updateBookingDTO.getEndDate());
             }

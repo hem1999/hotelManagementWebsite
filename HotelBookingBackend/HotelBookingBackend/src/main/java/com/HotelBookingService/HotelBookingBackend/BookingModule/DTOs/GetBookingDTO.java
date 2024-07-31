@@ -1,12 +1,12 @@
-package com.HotelBookingService.HotelBookingBackend.BookingModule;
+package com.HotelBookingService.HotelBookingBackend.BookingModule.DTOs;
 
+import com.HotelBookingService.HotelBookingBackend.BookingModule.BookingEntity;
 import com.HotelBookingService.HotelBookingBackend.RoomsModule.RoomEntity;
 import lombok.Getter;
 import lombok.Setter;
 
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -2,15 +2,18 @@ package com.HotelBookingService.HotelBookingBackend.UserModule;
 
 
 import com.HotelBookingService.HotelBookingBackend.BookingModule.BookingEntity;
+import com.HotelBookingService.HotelBookingBackend.UserModule.DTOs.AddUserDTO;
+import com.HotelBookingService.HotelBookingBackend.UserModule.DTOs.GetUserDTO;
+import com.HotelBookingService.HotelBookingBackend.UserModule.DTOs.updateUserDTO;
 
 import java.util.List;
 
 public interface UserServices {
-    public UserEntity findUserByEmail(String email);
-    public UserEntity findUserByUsername(String username);
-    public UserEntity findUserById(Long id);
-    public boolean addUser(AddUserDTO addUserDTO);
-    public boolean updateUser(updateUserDTO userEntity);
-    public boolean deleteUser(Long userId);
-    public List<BookingEntity> getBookings(Long userId);
+     GetUserDTO findUserByEmail(String email);
+     GetUserDTO findUserByUsername(String username);
+     GetUserDTO findUserById(Long id);
+     boolean addUser(AddUserDTO addUserDTO);
+     boolean updateUser(updateUserDTO userEntity);
+     boolean deleteUser(Long userId);
+     List<BookingEntity> getBookings(Long userId);
 }

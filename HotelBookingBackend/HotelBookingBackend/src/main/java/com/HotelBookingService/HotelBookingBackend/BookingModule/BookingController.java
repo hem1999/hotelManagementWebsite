@@ -1,6 +1,9 @@
 package com.HotelBookingService.HotelBookingBackend.BookingModule;
 
 
+import com.HotelBookingService.HotelBookingBackend.BookingModule.DTOs.AddBookingDTO;
+import com.HotelBookingService.HotelBookingBackend.BookingModule.DTOs.GetBookingDTO;
+import com.HotelBookingService.HotelBookingBackend.BookingModule.DTOs.UpdateBookingDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -2,6 +2,9 @@ package com.HotelBookingService.HotelBookingBackend.RoomsModule;
 
 
 
+import com.HotelBookingService.HotelBookingBackend.RoomsModule.DTOs.AddRoomDTO;
+import com.HotelBookingService.HotelBookingBackend.RoomsModule.DTOs.GetRoomDTO;
+import com.HotelBookingService.HotelBookingBackend.RoomsModule.DTOs.UpdateRoomDTO;
 import com.HotelBookingService.HotelBookingBackend.UserModule.UserEntity;
 import com.HotelBookingService.HotelBookingBackend.UserModule.UserRepository;
 import jakarta.persistence.EntityNotFoundException;

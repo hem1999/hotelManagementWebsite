@@ -1,6 +1,9 @@
 package com.HotelBookingService.HotelBookingBackend.UserModule;
 
 import com.HotelBookingService.HotelBookingBackend.BookingModule.BookingEntity;
+import com.HotelBookingService.HotelBookingBackend.UserModule.DTOs.AddUserDTO;
+import com.HotelBookingService.HotelBookingBackend.UserModule.DTOs.GetUserDTO;
+import com.HotelBookingService.HotelBookingBackend.UserModule.DTOs.updateUserDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,13 +21,14 @@ public class UserController {
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<UserEntity> getUser(@PathVariable Long id) {
-        UserEntity ue = this.userServiceImpl.findUserById(id);
+    public ResponseEntity<GetUserDTO> getUser(@PathVariable Long id) {
+        GetUserDTO ue = this.userServiceImpl.findUserById(id);
         if(ue == null) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(ue);
     }
+
     // TODO: do it later
 //    @GetMapping(path = "/allUsers")
 //    public ResponseEntity<List<UserEntity>> getAllUsers() {

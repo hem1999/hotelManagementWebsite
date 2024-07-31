@@ -1,4 +1,4 @@
-package com.HotelBookingService.HotelBookingBackend.RoomsModule;
+package com.HotelBookingService.HotelBookingBackend.RoomsModule.DTOs;
 
 import lombok.Getter;
 import lombok.Setter;

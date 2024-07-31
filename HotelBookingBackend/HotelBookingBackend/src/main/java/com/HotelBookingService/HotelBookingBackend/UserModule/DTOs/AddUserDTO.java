@@ -1,9 +1,7 @@
-package com.HotelBookingService.HotelBookingBackend.UserModule;
+package com.HotelBookingService.HotelBookingBackend.UserModule.DTOs;
 
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.List;
 
 @Getter
 @Setter

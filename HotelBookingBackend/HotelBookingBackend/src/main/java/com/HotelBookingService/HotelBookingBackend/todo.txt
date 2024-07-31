@@ -1,16 +1,16 @@
 [DONE]0. Implement and complete Feedback Entity [fetch feedbacks by userId, roomId, allFeedbacks]
 [DONE] 0. Implement the DTO for post request of user also!
-2. From booking also you should be able to get rooms
-1. From user you should get created rooms, only if he is admin
+[Done] 2. From booking also you should be able to get rooms
+1. From user, you should get created rooms, only if he is admin
 3. From rooms --> you should get all rooms available with no booking between startDate and EndDate
 4. While creating the room, user should be able to upload photos,
-    one should be choosen as primary, this will show up on list
+    one should be chosen as primary, this will show up on list
     others will showup as slider, upon viewing the specific details of it.
 
 5. In the update make it easy for user to store the booking and room,
     so that it won't send all the unnecessary data via rest api.
 
-5. password, email udpates should be secure!
+5. password, email updates should be secure!
 
 6. Since we are asking for unique username and email, you should have a endpoint to
     check if they are already taken.

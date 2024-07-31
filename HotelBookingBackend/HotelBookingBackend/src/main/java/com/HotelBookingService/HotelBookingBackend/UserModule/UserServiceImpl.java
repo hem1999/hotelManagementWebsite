@@ -1,16 +1,12 @@
 package com.HotelBookingService.HotelBookingBackend.UserModule;
 
 import com.HotelBookingService.HotelBookingBackend.BookingModule.BookingEntity;
-import com.HotelBookingService.HotelBookingBackend.BookingModule.BookingRepository;
-import com.HotelBookingService.HotelBookingBackend.RoomsModule.RoomEntity;
-import com.HotelBookingService.HotelBookingBackend.RoomsModule.RoomRepository;
-import jakarta.persistence.EntityExistsException;
+import com.HotelBookingService.HotelBookingBackend.UserModule.DTOs.AddUserDTO;
+import com.HotelBookingService.HotelBookingBackend.UserModule.DTOs.GetUserDTO;
+import com.HotelBookingService.HotelBookingBackend.UserModule.DTOs.updateUserDTO;
 import jakarta.persistence.EntityNotFoundException;
-import org.apache.catalina.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,19 +21,30 @@ public class UserServiceImpl implements UserServices {
     }
 
     @Override
-    public UserEntity findUserByEmail(String email) {
-        return this.userRepository.findByEmail(email).orElse(null);
+    public GetUserDTO findUserByEmail(String email) {
+        Optional<UserEntity> user = userRepository.findByEmail(email);
+        if(user.isEmpty()){
+            throw new EntityNotFoundException("User not found with email" + email);
+        }
+        return new GetUserDTO().makeGetUserDTOFromEntity(user.get());
     }
 
     @Override
-    public UserEntity findUserByUsername(String username) {
-        return this.userRepository.findByUsername(username).orElse(null);
+    public GetUserDTO findUserByUsername(String username) {
+        Optional<UserEntity> user = userRepository.findByUsername(username);
+        if(user.isEmpty()){
+            throw new EntityNotFoundException("User not found with username" + username);
+        }
+        return new GetUserDTO().makeGetUserDTOFromEntity(user.get());
     }
 
     @Override
-    public UserEntity findUserById(Long id) {
+    public GetUserDTO findUserById(Long id) {
         Optional<UserEntity> user = this.userRepository.findById(id);
-        return user.orElse(null);
+        if(user.isEmpty()){
+            throw new EntityNotFoundException("User not found with id " + id);
+        }
+        return new GetUserDTO().makeGetUserDTOFromEntity(user.get());
     }
 
     @Override
