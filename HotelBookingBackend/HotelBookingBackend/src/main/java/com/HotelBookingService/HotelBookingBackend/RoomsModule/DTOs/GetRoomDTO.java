@@ -13,7 +13,6 @@ public class GetRoomDTO {
     private String roomDescription;
     private String roomType;
     private int roomCapacity;
-    private Long bookingId;
     private Long CreatorId;
     private String CreatorName;
 
@@ -24,9 +23,6 @@ public class GetRoomDTO {
         getRoomDTO.setRoomDescription(r.getRoomDescription());
         getRoomDTO.setRoomType(r.getRoomType());
         getRoomDTO.setRoomCapacity(r.getRoomCapacity());
-        if(r.getBooking() != null) {
-            getRoomDTO.setBookingId(r.getBooking().getBookingId());
-        }
         getRoomDTO.setCreatorId(r.getCreatedByUser().getUserId());
         getRoomDTO.setCreatorName(r.getCreatedByUser().getFirstName() + " " + r.getCreatedByUser().getLastName());
         return getRoomDTO;

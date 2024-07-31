@@ -4,14 +4,18 @@ import com.HotelBookingService.HotelBookingBackend.BookingModule.BookingEntity;
 import com.HotelBookingService.HotelBookingBackend.UserModule.UserEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
+
 @Getter
 @Setter
 @Entity
+@NamedQuery(
+        name = "RoomEntity.bookedRoomsBetweenStartDateAndEndDate",
+        query= "select r from RoomEntity r where r.roomId not in (select br.roomId from BookingEntity b inner join b.rooms br where b.startDate<=:endDate and b.endDate>=:startDate)"
+)
 public class RoomEntity {
     @Id
     @GeneratedValue
@@ -22,9 +26,8 @@ public class RoomEntity {
     private int roomCapacity;
     private String roomDescription;
     @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "booking_id")
-    private BookingEntity booking;
+    @ManyToMany(mappedBy = "rooms")
+    private List<BookingEntity> bookings;
 
     @JsonIgnore
     @ManyToOne

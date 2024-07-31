@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -13,8 +13,8 @@ import java.util.List;
 public class AddBookingDTO {
 
     private Long userId;
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
-    private LocalDateTime bookingDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private LocalDate bookingDate;
     private List<Long> roomIds;
 }

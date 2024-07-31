@@ -4,14 +4,16 @@ import com.HotelBookingService.HotelBookingBackend.RoomsModule.DTOs.AddRoomDTO;
 import com.HotelBookingService.HotelBookingBackend.RoomsModule.DTOs.GetRoomDTO;
 import com.HotelBookingService.HotelBookingBackend.RoomsModule.DTOs.UpdateRoomDTO;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 public interface RoomServices {
-    public boolean addRoom(AddRoomDTO roomEntity);
-    public boolean deleteRoom(Long roomId);
-    public boolean updateRoom(UpdateRoomDTO updateRoomDTO);
-    public  List<GetRoomDTO> getAllRooms();
-    public Optional<GetRoomDTO> GetRoomById(Long roomId);
+     boolean addRoom(AddRoomDTO roomEntity);
+     boolean deleteRoom(Long roomId);
+     boolean updateRoom(UpdateRoomDTO updateRoomDTO);
+      List<GetRoomDTO> getAllRooms();
+     Optional<GetRoomDTO> GetRoomById(Long roomId);
+     List<GetRoomDTO> getAllRoomsAvailableBetweenDates(LocalDate startDate, LocalDate endDate);
 
 }

@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import java.util.HashMap;
@@ -17,8 +18,8 @@ public class GetBookingDTO {
 
     private Long bookingId;
     private LocalDateTime bookingDate;
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private Map<Long,String> roomIdsNamesMap;
     private Long customerId;
     private String customerName;
