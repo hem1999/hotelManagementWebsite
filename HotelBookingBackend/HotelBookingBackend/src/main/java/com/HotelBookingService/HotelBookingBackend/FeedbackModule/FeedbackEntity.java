@@ -1,21 +1,35 @@
 package com.HotelBookingService.HotelBookingBackend.FeedbackModule;
 
-import com.HotelBookingService.HotelBookingBackend.BookingModule.BookingEntity;
-import com.HotelBookingService.HotelBookingBackend.RoomsModule.RoomEntity;
-import com.HotelBookingService.HotelBookingBackend.UserModule.UserEntity;
-import jakarta.persistence.*;
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.time.LocalDate;
+
+@Getter
+@Setter
 @Entity
+@NamedQueries({
+        @NamedQuery(
+                name = "FeedbackEntity.customGetFeedbackByRoomId",
+                query = "select f from FeedbackEntity f where f.id.roomId=:roomId"
+        ),
+        @NamedQuery(
+                name = "FeedbackEntity.customGetFeedbackByUserId",
+                query = "select f from FeedbackEntity f where f.id.userId=:userId"
+        )}
+)
 public class FeedbackEntity {
-    @Id
-    @GeneratedValue
-    private FeedbackId feedbackId;
 
-    @ManyToOne
-    @JoinColumn(name="userId")
-    private UserEntity user;
+    @EmbeddedId
+    private FeedbackId fid;
 
-//    @ManyToOne
-//    @JoinColumn(name = "roomId")
-//    private RoomEntity room;
+    private String feedback;
+
+    private String rating;
+
+    private LocalDate createdDate;
 }

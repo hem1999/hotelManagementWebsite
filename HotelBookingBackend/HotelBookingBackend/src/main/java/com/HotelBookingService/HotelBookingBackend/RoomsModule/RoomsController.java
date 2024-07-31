@@ -1,5 +1,6 @@
 package com.HotelBookingService.HotelBookingBackend.RoomsModule;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,12 +31,12 @@ public class RoomsController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<RoomEntity> addRoom(@RequestBody RoomEntity room){
+    public ResponseEntity<RoomEntityPostRequestDTO> addRoom(@RequestBody RoomEntityPostRequestDTO room){
         boolean res = this.roomServiceImpl.addRoom(room);
         if(res) {
-            return ResponseEntity.ok(room);
+            return new ResponseEntity<>(room, HttpStatus.CREATED);
         }else{
-            return ResponseEntity.badRequest().build();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
