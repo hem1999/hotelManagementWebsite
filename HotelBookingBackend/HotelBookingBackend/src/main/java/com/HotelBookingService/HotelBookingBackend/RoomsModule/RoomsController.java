@@ -7,13 +7,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/rooms")
 public class RoomsController {
-    private RoomServiceImpl roomServiceImpl;
+    private final RoomServiceImpl roomServiceImpl;
     public RoomsController(RoomServiceImpl roomServiceImpl) {
         this.roomServiceImpl = roomServiceImpl;
     }
@@ -21,6 +22,12 @@ public class RoomsController {
     public ResponseEntity<List<GetRoomDTO>> getAllRooms(){
         List<GetRoomDTO> rooms = this.roomServiceImpl.getAllRooms();
         return ResponseEntity.ok(rooms);
+    }
+
+    @GetMapping("/filter")
+    public ResponseEntity<List<GetRoomDTO>> getAllRoomsByFilter(@RequestParam LocalDate startDate, @RequestParam LocalDate endDate){
+        List<GetRoomDTO> availableRooms = this.roomServiceImpl.getAllRoomsAvailableBetweenDates(startDate, endDate);
+        return new ResponseEntity<>(availableRooms, HttpStatus.OK);
     }
 
     @GetMapping(path = "{id}")

@@ -50,9 +50,9 @@ public class GetUserDTO {
         List<BookingEntity> upcoming = new ArrayList<>();
         for (BookingEntity b : userEntity.getBookings()) {
             System.out.println("Segregating started!");
-            LocalDate start = b.getStartDate().toLocalDate();
-            LocalDate end = b.getEndDate().toLocalDate();
-            System.out.println(b.getStartDate().toLocalDate());
+            LocalDate start = b.getStartDate();
+            LocalDate end = b.getEndDate();
+            System.out.println(b.getStartDate());
             if(end.isBefore(LocalDate.now())) {
                 previous.add(b);
             }

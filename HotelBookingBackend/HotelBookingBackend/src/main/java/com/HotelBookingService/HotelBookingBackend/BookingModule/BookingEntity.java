@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -25,11 +26,21 @@ public class BookingEntity {
     public UserEntity user;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "booking")
+    @JoinTable(
+        name = "bookings_rooms",
+        joinColumns={
+                @JoinColumn(name = "booking_id")
+        },
+            inverseJoinColumns = {
+                @JoinColumn(name = "room_id")
+            }
+
+    )
+    @ManyToMany
     public List<RoomEntity> rooms;
 
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
+    public LocalDate startDate;
+    private LocalDate endDate;
     private LocalDateTime bookingDate;
 
 }

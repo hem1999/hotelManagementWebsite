@@ -95,15 +95,12 @@ public class BookingServiceImpl implements BookingServices{
             }*/
             //dealing with room updates
 
-            for (RoomEntity room : b.getRooms()) {
-                room.setBooking(null);
-            }
+
             List<RoomEntity> rooms = new ArrayList<>();
             for (Long roomId : updateBookingDTO.getUpdatedRoomIds()) {
                 Optional<RoomEntity> room = this.roomRepository.findById(roomId);
                 if (room.isPresent()) {
                     RoomEntity r = room.get();
-                    r.setBooking(b);
                     this.roomRepository.save(r);
                     rooms.add(r);
                 } else {

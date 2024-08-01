@@ -12,6 +12,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -22,7 +23,6 @@ public class RoomServiceImpl implements RoomServices{
 
     private final RoomRepository roomRepository;
     private final UserRepository userRepository;
-
     public RoomServiceImpl(RoomRepository roomRepository, UserRepository userRepository) {
         this.roomRepository = roomRepository;
         this.userRepository = userRepository;
@@ -102,5 +102,14 @@ public class RoomServiceImpl implements RoomServices{
         return Optional.of(new GetRoomDTO().makeGetRoomDTOFromRoomEntity(r));
     }
 
+    @Override
+    public List<GetRoomDTO> getAllRoomsAvailableBetweenDates(LocalDate startDate, LocalDate endDate) {
+        List<RoomEntity> rooms = this.roomRepository.bookedRoomsBetweenStartDateAndEndDate(startDate, endDate);
+        List<GetRoomDTO> roomDTOs = new ArrayList<>();
+        for(RoomEntity r: rooms){
+            roomDTOs.add(new GetRoomDTO().makeGetRoomDTOFromRoomEntity(r));
+        }
+        return roomDTOs;
+    }
 
 }
