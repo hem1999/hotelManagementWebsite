@@ -10,5 +10,5 @@ import { Router, RouterLink,RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'hotelFrontend';
-  notLoggedIn=true;
+  notLoggedIn=false;
 }
