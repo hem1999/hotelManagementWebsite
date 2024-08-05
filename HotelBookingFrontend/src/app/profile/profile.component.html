@@ -1,1 +1,24 @@
-<p>profile works!</p>
+<div class="flex justify-end mr-3">
+    <button class="blue-btn" (click)="toggleUpdateForm()" [ngClass]="{'bg-red-400 border-red-500': showUpdateForm==true}">{{ updateButtonText}}</button>
+    <button class="blue-btn" (click)="toggleBookings()" [ngClass]="{'bg-red-400 border-red-500': showBookings==true}">{{ bookingButtonText }}</button>
+</div>
+<div class="flex justify-center mt-5">
+    @if(showUpdateForm){
+        <div class="pt-5 w-[25%] border-2 border-slate-400 rounded" >
+            <form [formGroup]="updateUserForm">
+                <label class="ml-6">username:</label>
+                <input type="text" name="username" formControlName="username" class="sim-input">
+                <label class="ml-6">firstname:</label>
+                <input type="text" name="firstname" formControlName="firstname" class="sim-input">
+                <label class="ml-6">lastname:</label>
+                <input type="text" name="lastname" formControlName="lastname" class="sim-input">
+                <label class="ml-6">phone:</label>
+                <input type="text" name="phone" formControlName="phone" class="sim-input">
+                <button class=" ml-6 blue-btn">Update</button>
+            </form>
+        </div>
+    }
+</div>
+@if(showBookings){
+    <app-list-bookings [bookings]="currentUserProfile().bookings"></app-list-bookings>
+}

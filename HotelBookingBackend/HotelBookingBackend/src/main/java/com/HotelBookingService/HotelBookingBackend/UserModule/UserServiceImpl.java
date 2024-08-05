@@ -1,14 +1,14 @@
 package com.HotelBookingService.HotelBookingBackend.UserModule;
 
 import com.HotelBookingService.HotelBookingBackend.BookingModule.BookingEntity;
+import com.HotelBookingService.HotelBookingBackend.BookingModule.DTOs.GetBookingDTO;
 import com.HotelBookingService.HotelBookingBackend.UserModule.DTOs.AddUserDTO;
 import com.HotelBookingService.HotelBookingBackend.UserModule.DTOs.GetUserDTO;
 import com.HotelBookingService.HotelBookingBackend.UserModule.DTOs.updateUserDTO;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class UserServiceImpl implements UserServices {
@@ -95,8 +95,16 @@ public class UserServiceImpl implements UserServices {
     }
 
     @Override
-    public List<BookingEntity> getBookings(Long userId) {
+    public Map<String, List<GetBookingDTO>> getBookings(Long userId) {
         Optional<UserEntity> ue  = this.userRepository.findById(userId);
-        return ue.map(UserEntity::getBookings).orElse(null);
+        if(ue.isPresent()){
+            UserEntity user = ue.get();
+            return new GetUserDTO().makeGetUserDTOFromEntity(user).getBookings();
+        }
+        Map<String, List<GetBookingDTO>> bookings = new HashMap<>();
+        bookings.put("previous", new ArrayList<>());
+        bookings.put("current", new ArrayList<>());
+        bookings.put("upcoming", new ArrayList<>());
+        return bookings;
     }
 }

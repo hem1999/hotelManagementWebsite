@@ -18,3 +18,5 @@ A. [Solved] with adding @JsonIgnore to all of my relationships
     -> We need to model it as ManyToMany.
     -> Then there will junction table containing b_id, r_id.
     -> [Solved/Refactored] -> It's very easy in the spring data jpa to change it!
+
+4. What if in a booking, multiple rooms are booked with multiple start and end dates?

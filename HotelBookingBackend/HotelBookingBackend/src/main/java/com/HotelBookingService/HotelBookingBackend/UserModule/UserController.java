@@ -1,6 +1,7 @@
 package com.HotelBookingService.HotelBookingBackend.UserModule;
 
 import com.HotelBookingService.HotelBookingBackend.BookingModule.BookingEntity;
+import com.HotelBookingService.HotelBookingBackend.BookingModule.DTOs.GetBookingDTO;
 import com.HotelBookingService.HotelBookingBackend.UserModule.DTOs.AddUserDTO;
 import com.HotelBookingService.HotelBookingBackend.UserModule.DTOs.GetUserDTO;
 import com.HotelBookingService.HotelBookingBackend.UserModule.DTOs.updateUserDTO;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(path = "/user")
@@ -60,8 +62,8 @@ public class UserController {
     }
 
     @GetMapping(path = "/userBookings/{id}")
-    public ResponseEntity<List<BookingEntity>> getUserBookings(@PathVariable Long id) {
-        List<BookingEntity> bookings = this.userServiceImpl.getBookings(id);
+    public ResponseEntity<Map<String, List<GetBookingDTO>>> getUserBookings(@PathVariable Long id) {
+        Map<String, List<GetBookingDTO>> bookings = this.userServiceImpl.getBookings(id);
         return ResponseEntity.ok(bookings);
     }
 

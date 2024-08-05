@@ -19,4 +19,8 @@
   .vertical{
     @apply flex flex-col justify-center;
   }
+
+  /* .showProfileMenu{
+    @apply hover:visible(.profile-menu) ;
+  } */
 }

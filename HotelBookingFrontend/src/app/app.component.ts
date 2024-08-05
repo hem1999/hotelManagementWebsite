@@ -10,5 +10,10 @@ import { Router, RouterLink,RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'hotelFrontend';
+  userid = 2; //TODO: later manage it through the authService.
   notLoggedIn=false;
+  showProfileMenu=false;
+  toggleShowMyProfileMenu(){
+    this.showProfileMenu = !this.showProfileMenu;
+  }
 }
