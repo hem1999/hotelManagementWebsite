@@ -1,6 +1,7 @@
 package com.HotelBookingService.HotelBookingBackend.UserModule.DTOs;
 
 import com.HotelBookingService.HotelBookingBackend.BookingModule.BookingEntity;
+import com.HotelBookingService.HotelBookingBackend.BookingModule.DTOs.GetBookingDTO;
 import com.HotelBookingService.HotelBookingBackend.RoomsModule.RoomEntity;
 import com.HotelBookingService.HotelBookingBackend.UserModule.UserEntity;
 import lombok.Getter;
@@ -21,7 +22,7 @@ public class GetUserDTO {
     private String lastName;
     private String email;
     private String phone;
-    private Map<String, List<BookingEntity>> bookings;
+    private Map<String, List<GetBookingDTO>> bookings;
     // It will have 3 keys: Previous (bookings before today),
     // Current (startDate < bookingDate < endDate)
     // Upcoming (startDate > today)
@@ -44,22 +45,23 @@ public class GetUserDTO {
         }
 
         getUserDTO.setRooms(rooms);
-        Map<String, List<BookingEntity>> bookings = new HashMap<>();
-        List<BookingEntity> previous = new ArrayList<>();
-        List<BookingEntity> current = new ArrayList<>();
-        List<BookingEntity> upcoming = new ArrayList<>();
+        /* Getting the data same as GET bookings/:id will be more meaning ful!*/
+        Map<String, List<GetBookingDTO>> bookings = new HashMap<>();
+        List<GetBookingDTO> previous = new ArrayList<>();
+        List<GetBookingDTO> current = new ArrayList<>();
+        List<GetBookingDTO> upcoming = new ArrayList<>();
         for (BookingEntity b : userEntity.getBookings()) {
             System.out.println("Segregating started!");
             LocalDate start = b.getStartDate();
             LocalDate end = b.getEndDate();
             System.out.println(b.getStartDate());
             if(end.isBefore(LocalDate.now())) {
-                previous.add(b);
+                previous.add(new GetBookingDTO().makeGetBookingDTOFromBookingEntity(b));
             }
             else if(start.isAfter(LocalDate.now())) {
-                upcoming.add(b);
+                upcoming.add(new GetBookingDTO().makeGetBookingDTOFromBookingEntity(b));
             }else{
-                current.add(b);
+                current.add(new GetBookingDTO().makeGetBookingDTOFromBookingEntity(b));
             }
         }
         bookings.put("previous", previous);
